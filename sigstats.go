@@ -8,18 +8,16 @@
 //
 // Example
 //
-// func main() {
-//   // Let's enable all the Stats
-//   sigstats.EnableSigStats(&sigstats.SigStatsSettings{
-//     NumCPU:       true,
-//     NumCGOCalls:  true,
-//     NumGoroutine: true,
-//     MemStats:     true,
-//     GoVersion:    true,
-//     GCStats:      true,
-//   })
-//   select {}
-// }
+// // Let's enable all the Stats
+// sigstats.EnableSigStats(&sigstats.SigStatsSettings{
+//   NumCPU:       true,
+//   NumCGOCalls:  true,
+//   NumGoroutine: true,
+//   MemStats:     true,
+//   GoVersion:    true,
+//   GCStats:      true,
+// })
+// select {}
 package sigstats
 
 import (
