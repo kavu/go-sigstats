@@ -2,6 +2,8 @@
 
 Package sigstats is a tiny handler function for printing some statistics (mostly memory) for running application with just a tiny call of **SIGINFO** - **^T** shortcut.
 
+You can view documentation on [godoc.org](http://godoc.org/github.com/kavu/go-sigstats "go-sigstats documentation").
+
 ## Example
 
 ```go
