@@ -26,3 +26,7 @@ func main() {
   select {}
 }
 ```
+
+## Thanks
+
+Inspired by [Dustin Sallings](https://github.com/dustin) [post](http://dustin.github.io/2013/07/04/siginfo.html) about SIGINFO. 
