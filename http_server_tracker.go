@@ -6,6 +6,13 @@
 
 package sigstats
 
+import (
+	"fmt"
+	"net/http"
+	"sync"
+	"time"
+)
+
 // Just a lockable map with current running requests
 type httpServerTracker struct {
 	sync.RWMutex
