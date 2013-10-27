@@ -6,23 +6,27 @@
 
 package sigstats
 
+// Just a lockable map with current running requests
 type httpServerTracker struct {
 	sync.RWMutex
 	requests map[*http.Request]time.Time
 }
 
+// Add request to Tracker
 func (self *httpServerTracker) add(r *http.Request, t time.Time) {
 	self.Lock()
 	defer self.Unlock()
 	self.requests[r] = t
 }
 
+// Remove completed request from Tracker
 func (self *httpServerTracker) remove(r *http.Request) {
 	self.Lock()
 	defer self.Unlock()
 	delete(self.requests, r)
 }
 
+// Print a list of the current running http.Request
 func (self *httpServerTracker) report() {
 	self.RLock()
 	defer self.RUnlock()
@@ -37,6 +41,7 @@ func (self *httpServerTracker) report() {
 	fmt.Println()
 }
 
+// We need to init Sigstats Handler and initilize new Tracker for actually tracking
 func InitSigStatsHTTPRequstTracker() *httpServerTracker {
 	tr := &httpServerTracker{
 		requests: map[*http.Request]time.Time{},
@@ -47,6 +52,7 @@ func InitSigStatsHTTPRequstTracker() *httpServerTracker {
 	return tr
 }
 
+// HTTP Middleware. Can be used with different muxers, such as https://github.com/gorilla/mux. You need to pass a pointer to httpServerTracker, where middleware will collect runtime data.
 func SigStatsTrackerMiddleware(h http.Handler, tr *httpServerTracker) http.Handler {
 	f := func(w http.ResponseWriter, r *http.Request) {
 		tr.add(r, time.Now())
